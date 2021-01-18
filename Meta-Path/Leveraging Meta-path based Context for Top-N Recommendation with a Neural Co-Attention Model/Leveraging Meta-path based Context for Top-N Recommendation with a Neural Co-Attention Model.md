@@ -64,7 +64,7 @@ Here, we adopt the commonly used Convolution Neural Network (CNN) to deal with s
 
 **Meta-path Embedding**
 
-We further apply the max pooling operation to derive the embedding for a meta-path. Let ![hkp=1](C:\Users\Dell\Desktop\笔记\论文\Meta-path\hkp=1.PNG) denote the embeddings
+We further apply the max pooling operation to derive the embedding for a meta-path. Let ![hkp=1](./hkp=1.PNG) denote the embeddings
 for the K selected path instances from meta-path ρ.
 
 ![cp](./cp.PNG)
