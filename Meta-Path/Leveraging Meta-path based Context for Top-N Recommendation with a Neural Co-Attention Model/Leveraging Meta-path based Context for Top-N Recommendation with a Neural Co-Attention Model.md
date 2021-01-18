@@ -34,7 +34,7 @@ We set up a lookup layer to transform the one-hot representations of users and i
 
 Formally, given a user-item pair ⟨u, i⟩, let pu ∈ R|U|×1 and qi ∈ R|I|×1 denote their one-hot representations.
 
-![2](C:\Users\Dell\Desktop\笔记\论文\Meta-path\2.PNG)
+![2](./2.PNG)
 
 
 
@@ -56,7 +56,7 @@ We can incorporate the entities from HIN related to an interaction as the contex
 
 Here, we adopt the commonly used Convolution Neural Network (CNN) to deal with sequences of variable lengths. The structure of CNN consists of a convolution layer (producing new features with the convolution operation) and a max pooling layer.
 
-![3](C:\Users\Dell\Desktop\笔记\论文\Meta-path\3.PNG)
+![3](./3.PNG)
 
 **Xp** denotes the matrix of the path instance p and **Θ** denotes all the related parameters in CNNs
 
@@ -67,13 +67,13 @@ Here, we adopt the commonly used Convolution Neural Network (CNN) to deal with s
 We further apply the max pooling operation to derive the embedding for a meta-path. Let ![hkp=1](C:\Users\Dell\Desktop\笔记\论文\Meta-path\hkp=1.PNG) denote the embeddings
 for the K selected path instances from meta-path ρ.
 
-![cp](C:\Users\Dell\Desktop\笔记\论文\Meta-path\cp.PNG)
+![cp](./cp.PNG)
 
 **Simple Average Embedding for Meta-path based Context**
 
 We apply the average pooling operation to derive the embedding for modeling the aggregate meta-path based context.
 
-![cui](C:\Users\Dell\Desktop\笔记\论文\Meta-path\cui.PNG)
+![cui](./cui.PNG)
 
 where **cu→i** is the embedding for meta-path based context and **Mu→i** is the set of the considered meta-paths for the current interaction. In this naive embedding method, each meta-path indeed receives equal attention, and the representation of meta-path based context fully depends on the generated path instances.
 
@@ -81,25 +81,25 @@ where **cu→i** is the embedding for meta-path based context and **Mu→i** is 
 **Attention for Meta-path based Context** Since different meta-paths may have different semantics in an interaction, welearn the interaction-specific attention weights over meta-paths conditioned on the involved user and item. Given the user embedding
 xu , item embedding yi , the context embedding cρ for a meta-path ρ, we adopt a two-layer architecture to implement the attention
 
-![auip](C:\Users\Dell\Desktop\笔记\论文\Meta-path\auip.PNG)
+![auip](./auip.PNG)
 
 The final meta-path weights are obtained by normalizing the above attentive scores over all the meta-paths using the softmax function
 
-![softmax](C:\Users\Dell\Desktop\笔记\论文\Meta-path\softmax.PNG)
+![softmax](./softmax.PNG)
 
 After we obtain the meta-path attention scores αu,i,ρ , the newembedding for aggregate meta-path context can be given as the following weighted sum:
 
-![attention cui](C:\Users\Dell\Desktop\笔记\论文\Meta-path\attention cui.PNG)
+![attention cui](./attention cui.PNG)
 
 **Attention for Users and Items**
 
 Given a user and an item, the meta-path connecting them provide important interaction context, which is likely to affect the original representations of users and items. Giving original user and item latent embeddings **xu** and **yi** , and the meta-path based context embedding **cu→i** for the interaction between **u** and **i**, we use a single-layer network to compute the attention vectors **βu** and **βi** for user u and item i as：
 
-![bui](C:\Users\Dell\Desktop\笔记\论文\Meta-path\bui.PNG)
+![bui](./bui.PNG)
 
 Then, the final representations of user and item are computed by using an element-wise product “⊙" with the attention vectors：
 
-![xuyi](C:\Users\Dell\Desktop\笔记\论文\Meta-path\xuyi.PNG)
+![xuyi](./xuyi.PNG)
 
 To our knowledge, few HIN based recommendation methods are able to learn explicit representations for meta-paths, especially in an interaction-specific way.
 
@@ -107,11 +107,11 @@ To our knowledge, few HIN based recommendation methods are able to learn explici
 
 Until now, given an interaction between user u and item i, we have the embeddings for user u, item i and the meta-path connecting hem. We combine the three embedding vectors into a unified epresentation of the current interaction as below:
 
-![xui](C:\Users\Dell\Desktop\笔记\论文\Meta-path\xui.PNG)
+![xui](./xui.PNG)
 
 Hxu,i encodes the information of an interaction from three aspects: the involved user, the involved item and the corresponding meta-path based context. Following, we feed Hxu,i into a MLP component in order to implement a nonlinear function for modeling complicated interactions
 
-![rui](C:\Users\Dell\Desktop\笔记\论文\Meta-path\rui.PNG)
+![rui](./rui.PNG)
 
 With the premise that neural network models can learn more abstractive features of data via using a small number of hidden units for higher layers, we empirically implement a tower structure for the MLP component, halving the layer size for each successive higher layer.
 
@@ -120,4 +120,4 @@ point-wise recommendation models for the rating prediction task usually adopt th
 
 While, in our task, we have only implicit feedback available. Following, we learn the parameters of our model with negative sampling and the objective for an interaction ⟨u, i⟩ can be formulated as follows:
 
-![loss](C:\Users\Dell\Desktop\笔记\论文\Meta-path\loss.PNG)
+![loss](./loss.PNG)
