@@ -22,7 +22,7 @@ MPbC 表示
 
 ##### **1.Model Overview**
 
-![1](..\1.PNG)
+![1](./1.PNG)
 
 The **meta-path based context** is first modeled into a low-dimensional embedding using a hierarchical neural network.
 
